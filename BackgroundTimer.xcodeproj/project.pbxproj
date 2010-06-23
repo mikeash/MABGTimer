@@ -1,0 +1,228 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C21329D311D2CDD000EC59F7 /* BackgroundResizingArray.m in Sources */ = {isa = PBXBuildFile; fileRef = C21329D211D2CDD000EC59F7 /* BackgroundResizingArray.m */; };
+		C29BB10E11D2CC0C004D62AB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29BB10D11D2CC0C004D62AB /* Foundation.framework */; };
+		C29BB11211D2CC0C004D62AB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C29BB11111D2CC0C004D62AB /* main.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C29BB10711D2CC0C004D62AB /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		C21329D111D2CDD000EC59F7 /* BackgroundResizingArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundResizingArray.h; sourceTree = "<group>"; };
+		C21329D211D2CDD000EC59F7 /* BackgroundResizingArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundResizingArray.m; sourceTree = "<group>"; };
+		C29BB10911D2CC0C004D62AB /* BackgroundTimer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BackgroundTimer; sourceTree = BUILT_PRODUCTS_DIR; };
+		C29BB10D11D2CC0C004D62AB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C29BB11111D2CC0C004D62AB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C29BB11411D2CC0C004D62AB /* BackgroundTimer_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BackgroundTimer_Prefix.pch; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C29BB10611D2CC0C004D62AB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C29BB10E11D2CC0C004D62AB /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C29BB0FC11D2CC0C004D62AB = {
+			isa = PBXGroup;
+			children = (
+				C29BB10311D2CC0C004D62AB /* Source */,
+				C29BB10A11D2CC0C004D62AB /* Products */,
+				C29BB10C11D2CC0C004D62AB /* Frameworks */,
+				C29BB11311D2CC0C004D62AB /* Other Sources */,
+			);
+			sourceTree = "<group>";
+		};
+		C29BB10311D2CC0C004D62AB /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				C29BB11111D2CC0C004D62AB /* main.m */,
+				C21329D111D2CDD000EC59F7 /* BackgroundResizingArray.h */,
+				C21329D211D2CDD000EC59F7 /* BackgroundResizingArray.m */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		C29BB10A11D2CC0C004D62AB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C29BB10911D2CC0C004D62AB /* BackgroundTimer */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C29BB10C11D2CC0C004D62AB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C29BB10D11D2CC0C004D62AB /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C29BB11311D2CC0C004D62AB /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				C29BB11411D2CC0C004D62AB /* BackgroundTimer_Prefix.pch */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C29BB10811D2CC0C004D62AB /* BackgroundTimer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C29BB11711D2CC0C004D62AB /* Build configuration list for PBXNativeTarget "BackgroundTimer" */;
+			buildPhases = (
+				C29BB10511D2CC0C004D62AB /* Sources */,
+				C29BB10611D2CC0C004D62AB /* Frameworks */,
+				C29BB10711D2CC0C004D62AB /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BackgroundTimer;
+			productName = BackgroundTimer;
+			productReference = C29BB10911D2CC0C004D62AB /* BackgroundTimer */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C29BB0FE11D2CC0C004D62AB /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C29BB10111D2CC0C004D62AB /* Build configuration list for PBXProject "BackgroundTimer" */;
+			compatibilityVersion = "Xcode 3.2";
+			hasScannedForEncodings = 0;
+			mainGroup = C29BB0FC11D2CC0C004D62AB;
+			productRefGroup = C29BB10A11D2CC0C004D62AB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C29BB10811D2CC0C004D62AB /* BackgroundTimer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C29BB10511D2CC0C004D62AB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C29BB11211D2CC0C004D62AB /* main.m in Sources */,
+				C21329D311D2CDD000EC59F7 /* BackgroundResizingArray.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		C29BB11511D2CC0C004D62AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.6;
+			};
+			name = Debug;
+		};
+		C29BB11611D2CC0C004D62AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PREBINDING = NO;
+				SDKROOT = macosx10.6;
+			};
+			name = Release;
+		};
+		C29BB11811D2CC0C004D62AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = BackgroundTimer_Prefix.pch;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = BackgroundTimer;
+			};
+			name = Debug;
+		};
+		C29BB11911D2CC0C004D62AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = BackgroundTimer_Prefix.pch;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = BackgroundTimer;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C29BB10111D2CC0C004D62AB /* Build configuration list for PBXProject "BackgroundTimer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C29BB11511D2CC0C004D62AB /* Debug */,
+				C29BB11611D2CC0C004D62AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C29BB11711D2CC0C004D62AB /* Build configuration list for PBXNativeTarget "BackgroundTimer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C29BB11811D2CC0C004D62AB /* Debug */,
+				C29BB11911D2CC0C004D62AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C29BB0FE11D2CC0C004D62AB /* Project object */;
+}
