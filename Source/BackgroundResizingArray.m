@@ -36,8 +36,8 @@
 
 - (void)_resize
 {
-    NSLog(@"Resizing!");
-    if(_capacity < _count)
+    NSLog(@"Resizing! %llu %llu", (unsigned long long)_capacity, (unsigned long long)_count);
+    if(_capacity > _count)
         [self _realloc: _count];
 }
 
