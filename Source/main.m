@@ -25,8 +25,14 @@ int main (int argc, const char * argv[]) {
     NSLog(@"%@", array);
     [array removeAllObjects];
     NSLog(@"%@", array);
+    [array release];
     
     [pool drain];
+    
+    sleep(1);
+    fprintf(stderr, "all done!\n");
+    sleep(1000);
+    
     return 0;
 }
 

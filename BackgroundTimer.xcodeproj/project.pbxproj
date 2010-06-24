@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		C21329D311D2CDD000EC59F7 /* BackgroundResizingArray.m in Sources */ = {isa = PBXBuildFile; fileRef = C21329D211D2CDD000EC59F7 /* BackgroundResizingArray.m */; };
+		C249147411D2FBCE00D4783C /* MABGTimer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C249147211D2FBCE00D4783C /* MABGTimer.h */; };
+		C249147511D2FBCE00D4783C /* MABGTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = C249147311D2FBCE00D4783C /* MABGTimer.m */; };
 		C29BB10E11D2CC0C004D62AB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29BB10D11D2CC0C004D62AB /* Foundation.framework */; };
 		C29BB11211D2CC0C004D62AB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C29BB11111D2CC0C004D62AB /* main.m */; };
 /* End PBXBuildFile section */
@@ -19,6 +21,7 @@
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
+				C249147411D2FBCE00D4783C /* MABGTimer.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -27,6 +30,8 @@
 /* Begin PBXFileReference section */
 		C21329D111D2CDD000EC59F7 /* BackgroundResizingArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundResizingArray.h; sourceTree = "<group>"; };
 		C21329D211D2CDD000EC59F7 /* BackgroundResizingArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundResizingArray.m; sourceTree = "<group>"; };
+		C249147211D2FBCE00D4783C /* MABGTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MABGTimer.h; sourceTree = "<group>"; };
+		C249147311D2FBCE00D4783C /* MABGTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MABGTimer.m; sourceTree = "<group>"; };
 		C29BB10911D2CC0C004D62AB /* BackgroundTimer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BackgroundTimer; sourceTree = BUILT_PRODUCTS_DIR; };
 		C29BB10D11D2CC0C004D62AB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C29BB11111D2CC0C004D62AB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -61,6 +66,8 @@
 				C29BB11111D2CC0C004D62AB /* main.m */,
 				C21329D111D2CDD000EC59F7 /* BackgroundResizingArray.h */,
 				C21329D211D2CDD000EC59F7 /* BackgroundResizingArray.m */,
+				C249147211D2FBCE00D4783C /* MABGTimer.h */,
+				C249147311D2FBCE00D4783C /* MABGTimer.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -134,6 +141,7 @@
 			files = (
 				C29BB11211D2CC0C004D62AB /* main.m in Sources */,
 				C21329D311D2CDD000EC59F7 /* BackgroundResizingArray.m in Sources */,
+				C249147511D2FBCE00D4783C /* MABGTimer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
