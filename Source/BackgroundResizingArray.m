@@ -13,11 +13,21 @@
 
 @implementation BackgroundResizingArray
 
+- (id)init
+{
+    if((self = [super init]))
+    {
+        _resizeTimer = [[MABGTimer alloc] initWithObject: self];
+    }
+    return self;
+}
+
 - (void)dealloc
 {
     [self removeAllObjects];
     
-    MABGTimerCancel(@"resize");
+    [_resizeTimer cancel];
+    [_resizeTimer release];
     free(_objs);
     [super dealloc];
 }
@@ -51,9 +61,9 @@
     if(index < _count)
     {
         __block id ret;
-        MABGTimerLock(@"resize", ^{
+        [_resizeTimer performWhileLocked: ^{
             ret = [_objs[index] retain];
-        });
+        }];
         return [ret autorelease];
     }
     else
@@ -71,11 +81,11 @@
     if(index > _count)
         [NSException raise: NSRangeException format: @"Index %llu is beyond end of array %llu", (unsigned long long)index, (unsigned long long)_count];
     
-    MABGTimerLock(@"resize", ^{
+    [_resizeTimer performWhileLocked: ^{
         [self _ensureSpace: _count + 1];
         memmove(_objs + index + 1, _objs + index, (_count - index) * sizeof(*_objs));
         _objs[index] = [anObject retain];
-    });
+    }];
     _count++;
 }
 
@@ -90,26 +100,26 @@
     if(index >= _count)
         [NSException raise: NSRangeException format: @"Index %llu is beyond end of array %llu", (unsigned long long)index, (unsigned long long)_count];
     
-    MABGTimerLock(@"resize", ^{
+    [_resizeTimer performWhileLocked: ^{
         [_objs[index] release];
         _objs[index] = nil;
         memmove(_objs + index, _objs + index + 1, (_count - index) * sizeof(*_objs));
-    });
+    }];
     _count--;
     
-    MABGTimer(@"resize", 0.5, ^(id self) {
+    [_resizeTimer afterDelay: 0.5 do: ^(id self) {
         [self _resize];
-    });
+    }];
 }
 
 - (void)replaceObjectAtIndex: (NSUInteger)index withObject: (id)anObject
 {
     if(index >= _count)
         [NSException raise: NSRangeException format: @"Index %llu is beyond end of array %llu", (unsigned long long)index, (unsigned long long)_count];
-    MABGTimerLock(@"resize", ^{
+    [_resizeTimer performWhileLocked: ^{
         [_objs[index] release];
         _objs[index] = [anObject retain];
-    });
+    }];
 }
 
 @end

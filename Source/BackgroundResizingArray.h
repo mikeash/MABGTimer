@@ -9,11 +9,15 @@
 #import <Cocoa/Cocoa.h>
 
 
+@class MABGTimer;
+
 @interface BackgroundResizingArray : NSMutableArray
 {
     id *_objs;
     NSUInteger _count;
     NSUInteger _capacity;
+    
+    MABGTimer *_resizeTimer;
 }
 
 @end

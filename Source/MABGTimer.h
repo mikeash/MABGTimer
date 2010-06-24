@@ -9,10 +9,16 @@
 #import <Cocoa/Cocoa.h>
 
 
-void MABGTimerF(id obj, const char *func, NSString *identifier, NSTimeInterval delay, void (^block)(id self));
-void MABGTimerLockF(id obj, const char *func, NSString *identifier, void (^block)(void));
-void MABGTimerCancelF(id obj, const char *func, NSString *identifier);
+@interface MABGTimer : NSObject
+{
+    id _obj;
+    dispatch_queue_t _queue;
+    dispatch_source_t _timer;
+}
 
-#define MABGTimer(identifier, delay, ...) MABGTimerF(self, __func__, identifier, delay, __VA_ARGS__)
-#define MABGTimerLock(identifier, ...) MABGTimerLockF(self, __func__, identifier, __VA_ARGS__)
-#define MABGTimerCancel(identifier) MABGTimerCancelF(self, __func__, identifier)
+- (id)initWithObject: (id)obj;
+- (void)afterDelay: (NSTimeInterval)delay do: (void (^)(id self))block;
+- (void)performWhileLocked: (void (^)(void))block;
+- (void)cancel;
+
+@end
