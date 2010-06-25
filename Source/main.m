@@ -34,12 +34,13 @@ int main (int argc, const char * argv[]) {
     }
     [array removeAllObjects];
     NSLog(@"%@", array);
-    [array release];
     
-    sleep(1);
+    NSLog(@"sleeping");
+    sleep(2);
+    [array release];
+    NSLog(@"all done!");
     [pool drain];
     
-    fprintf(stderr, "all done!\n");
     sleep(1000);
     
     return 0;

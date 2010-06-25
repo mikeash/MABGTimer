@@ -16,9 +16,15 @@
 
 - (id)initWithObject: (id)obj
 {
+    return [self initWithObject: obj behavior: MABGTimerCoalesce];
+}
+
+- (id)initWithObject: (id)obj behavior: (MABGTimerBehavior)behavior
+{
     if((self = [super init]))
     {
         _obj = obj;
+        _behavior = behavior;
         _queue = dispatch_queue_create("com.mikeash.MABGTimer", NULL);
     }
     return self;
@@ -53,15 +59,19 @@
 - (void)afterDelay: (NSTimeInterval)delay do: (void (^)(id self))block
 {
     [self performWhileLocked: ^{
-        if(!_timer)
-        {
+        BOOL shouldProceed = !_timer || _behavior == MABGTimerDelay;
+        BOOL hasTimer = _timer != nil;
+        if(!hasTimer)
             _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, _queue);
+        if(shouldProceed)
+        {
             dispatch_source_set_timer(_timer, dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC), 0, 0);
             dispatch_source_set_event_handler(_timer, ^{
                 block(_obj);
                 [self _cancel];
             });
-            dispatch_resume(_timer);
+            if(!hasTimer)
+                dispatch_resume(_timer);
         }
     }];
 }
