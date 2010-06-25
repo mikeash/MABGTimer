@@ -8,7 +8,6 @@
 
 #import "MABGTimer.h"
 
-#import <dispatch/dispatch.h>
 #import <objc/runtime.h>
 
 
@@ -45,6 +44,11 @@
         _timer = NULL;
     }
 }    
+
+- (void)setTargetQueue: (dispatch_queue_t)target
+{
+    dispatch_set_target_queue(_queue, target);
+}
 
 - (void)afterDelay: (NSTimeInterval)delay do: (void (^)(id self))block
 {

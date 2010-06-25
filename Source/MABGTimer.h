@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import <dispatch/dispatch.h>
+
 
 @interface MABGTimer : NSObject
 {
@@ -17,6 +19,7 @@
 }
 
 - (id)initWithObject: (id)obj;
+- (void)setTargetQueue: (dispatch_queue_t)target;
 - (void)afterDelay: (NSTimeInterval)delay do: (void (^)(id self))block;
 - (void)performWhileLocked: (void (^)(void))block;
 - (void)cancel;
