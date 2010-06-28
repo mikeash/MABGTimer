@@ -8,6 +8,7 @@
 
 #import "MABGTimer.h"
 
+#import <mach/mach_time.h>
 #import <objc/runtime.h>
 
 
@@ -56,16 +57,33 @@
     dispatch_set_target_queue(_queue, target);
 }
 
+- (NSTimeInterval)_now
+{
+    uint64_t t = mach_absolute_time();
+    Nanoseconds nano = AbsoluteToNanoseconds(*(AbsoluteTime *)&t);
+    NSTimeInterval seconds = (double)*(uint64_t *)&nano / (double)NSEC_PER_SEC;
+    return seconds;
+}
+
 - (void)afterDelay: (NSTimeInterval)delay do: (void (^)(id self))block
 {
     [self performWhileLocked: ^{
-        BOOL shouldProceed = !_timer || _behavior == MABGTimerDelay;
         BOOL hasTimer = _timer != nil;
+        
+        BOOL shouldProceed = NO;
+        if(!hasTimer)
+            shouldProceed = YES;
+        else if(_behavior == MABGTimerDelay)
+            shouldProceed = YES;
+        else if(_behavior == MABGTimerCoalesce && [self _now] + delay < _nextFireTime)
+            shouldProceed = YES;
+        
         if(!hasTimer)
             _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, _queue);
         if(shouldProceed)
         {
             dispatch_source_set_timer(_timer, dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC), 0, 0);
+            _nextFireTime = [self _now] + delay;
             dispatch_source_set_event_handler(_timer, ^{
                 block(_obj);
                 [self _cancel];

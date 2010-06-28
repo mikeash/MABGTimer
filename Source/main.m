@@ -10,11 +10,18 @@
 #import <Foundation/Foundation.h>
 
 #import "BackgroundResizingArray.h"
+#import "MABGTimer.h"
 
 
 int main (int argc, const char * argv[]) {
 
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+    
+    MABGTimer *timer = [[MABGTimer alloc] initWithObject: nil];
+    id block = ^{ NSLog(@"coalesced!"); };
+    [timer afterDelay: 1000 do: block];
+    [timer afterDelay: 0.1 do: block];
+    sleep(1);
     
     NSMutableArray *array = [[BackgroundResizingArray alloc] init];
     [array addObject: @"one"];

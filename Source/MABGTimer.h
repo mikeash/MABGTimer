@@ -23,6 +23,7 @@ typedef enum
     dispatch_queue_t _queue;
     dispatch_source_t _timer;
     MABGTimerBehavior _behavior;
+    NSTimeInterval _nextFireTime;
 }
 
 - (id)initWithObject: (id)obj;
