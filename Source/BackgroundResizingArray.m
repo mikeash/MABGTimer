@@ -8,6 +8,8 @@
 
 #import "BackgroundResizingArray.h"
 
+#import <malloc/malloc.h>
+
 #import "MABGTimer.h"
 
 
@@ -34,8 +36,10 @@
 
 - (void)_realloc: (NSUInteger)howmuch
 {
-    _capacity = howmuch;
-    _objs = realloc(_objs, _capacity * sizeof(*_objs));
+    size_t size = howmuch * sizeof(*_objs);
+    size = malloc_good_size(size);
+    _objs = realloc(_objs, size);
+    _capacity = size / sizeof(*_objs);
 }
 
 - (void)_ensureSpace: (NSUInteger)amount
