@@ -65,7 +65,7 @@
 			mach_timebase_info(&info);
 		});
 		
-		NSTimeInterval t = mach_absolute_time;
+		NSTimeInterval t = mach_absolute_time();
 		t *= info.numer;
 		t /= info.denom;
 		return t;
