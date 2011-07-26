@@ -7,7 +7,7 @@
 //
 
 #import <dispatch/dispatch.h>
-
+#import <Foundation/Foundation.h>
 
 typedef enum
 {
