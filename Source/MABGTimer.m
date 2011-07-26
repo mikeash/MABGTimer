@@ -60,7 +60,7 @@
 - (NSTimeInterval)_now
 {
     static mach_timebase_info_data_t info;
-		dispatch_once_t pred;
+		static dispatch_once_t pred;
 		dispatch_once(&pred, ^{
 			mach_timebase_info(&info);
 		});
