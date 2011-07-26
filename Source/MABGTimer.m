@@ -59,10 +59,14 @@
 
 - (NSTimeInterval)_now
 {
-    uint64_t t = mach_absolute_time();
-    Nanoseconds nano = AbsoluteToNanoseconds(*(AbsoluteTime *)&t);
-    NSTimeInterval seconds = (double)*(uint64_t *)&nano / (double)NSEC_PER_SEC;
-    return seconds;
+    mach_timebase_info_data_t info;
+    mach_timebase_info(&info);
+    
+    uint64_t start = mach_absolute_time();
+    
+    start *= info.numer;
+    start /= info.denom;
+    return start;
 }
 
 - (void)afterDelay: (NSTimeInterval)delay do: (void (^)(id self))block
