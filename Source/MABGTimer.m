@@ -59,14 +59,16 @@
 
 - (NSTimeInterval)_now
 {
-    mach_timebase_info_data_t info;
-    mach_timebase_info(&info);
-    
-    uint64_t start = mach_absolute_time();
-    
-    start *= info.numer;
-    start /= info.denom;
-    return start;
+    static mach_timebase_info_data_t info;
+		dispatch_once_t pred;
+		dispatch_once(&pred, ^{
+			mach_timebase_info(&info);
+		});
+		
+		NSTimeInterval t = mach_absolute_time;
+		t *= info.numer;
+		t /= info.denom;
+		return t;
 }
 
 - (void)afterDelay: (NSTimeInterval)delay do: (void (^)(id self))block
