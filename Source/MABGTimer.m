@@ -39,7 +39,10 @@
         dispatch_release(_timer);
     }
     dispatch_release(_queue);
+	
+#if !__has_feature(objc_arc) 
     [super dealloc];
+#endif
 }
 
 - (void)_cancel
