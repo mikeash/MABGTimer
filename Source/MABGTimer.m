@@ -17,16 +17,16 @@
 
 - (id)initWithObject: (id)obj
 {
-    return [self initWithObject: obj behavior: MABGTimerCoalesce];
+    return [self initWithObject: obj behavior: MABGTimerCoalesce queueLabel:"com.mikeash.MABGTimer"];
 }
 
-- (id)initWithObject: (id)obj behavior: (MABGTimerBehavior)behavior
+- (id)initWithObject: (id)obj behavior: (MABGTimerBehavior)behavior queueLabel:(char const *)queueLabel
 {
     if((self = [super init]))
     {
         _obj = obj;
         _behavior = behavior;
-        _queue = dispatch_queue_create("com.mikeash.MABGTimer", NULL);
+        _queue = dispatch_queue_create(queueLabel, NULL);
     }
     return self;
 }

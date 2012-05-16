@@ -25,7 +25,7 @@ typedef enum
 }
 
 - (id)initWithObject: (id)obj;
-- (id)initWithObject: (id)obj behavior: (MABGTimerBehavior)behavior;
+- (id)initWithObject: (id)obj behavior: (MABGTimerBehavior)behavior queueLabel:(char const *)queueLabel;
 
 - (void)setTargetQueue: (dispatch_queue_t)target;
 - (void)afterDelay: (NSTimeInterval)delay do: (void (^)(id self))block;
