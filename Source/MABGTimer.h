@@ -17,15 +17,15 @@ typedef enum
 
 @interface MABGTimer : NSObject
 {
-    id _obj;
+    __unsafe_unretained id _obj;
     dispatch_queue_t _queue;
     dispatch_source_t _timer;
     MABGTimerBehavior _behavior;
     NSTimeInterval _nextFireTime;
 }
 
-- (id)initWithObject: (id)obj;
-- (id)initWithObject: (id)obj behavior: (MABGTimerBehavior)behavior;
+- (id)initWithObject:(id)obj;
+- (id)initWithObject:(id)obj behavior: (MABGTimerBehavior)behavior queueLabel:(char const *)queueLabel;
 
 - (void)setTargetQueue: (dispatch_queue_t)target;
 - (void)afterDelay: (NSTimeInterval)delay do: (void (^)(id self))block;
