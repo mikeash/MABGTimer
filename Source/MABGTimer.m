@@ -31,15 +31,21 @@
     return self;
 }
 
+- (void)_finalize
+{
+    [self _cancel];
+    dispatch_release(_queue);
+}
+
+- (void)finalize
+{
+    [self _finalize];
+    [super finalize];
+}
+
 - (void)dealloc
 {
-    if(_timer)
-    {
-        dispatch_source_cancel(_timer);
-        dispatch_release(_timer);
-    }
-    dispatch_release(_queue);
-	
+    [self _finalize];
 #if !__has_feature(objc_arc) 
     [super dealloc];
 #endif
