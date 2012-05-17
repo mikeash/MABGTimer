@@ -31,6 +31,16 @@
     return self;
 }
 
+- (void)_cancel
+{
+    if(_timer)
+    {
+        dispatch_source_cancel(_timer);
+        dispatch_release(_timer);
+        _timer = NULL;
+    }
+}    
+
 - (void)_finalize
 {
     [self _cancel];
@@ -50,16 +60,6 @@
     [super dealloc];
 #endif
 }
-
-- (void)_cancel
-{
-    if(_timer)
-    {
-        dispatch_source_cancel(_timer);
-        dispatch_release(_timer);
-        _timer = NULL;
-    }
-}    
 
 - (void)setTargetQueue: (dispatch_queue_t)target
 {
