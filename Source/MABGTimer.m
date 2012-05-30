@@ -17,32 +17,18 @@
 
 - (id)initWithObject: (id)obj
 {
-    return [self initWithObject: obj behavior: MABGTimerCoalesce];
+    return [self initWithObject: obj behavior: MABGTimerCoalesce queueLabel:"com.mikeash.MABGTimer"];
 }
 
-- (id)initWithObject: (id)obj behavior: (MABGTimerBehavior)behavior
+- (id)initWithObject: (id)obj behavior: (MABGTimerBehavior)behavior queueLabel:(char const *)queueLabel
 {
     if((self = [super init]))
     {
         _obj = obj;
         _behavior = behavior;
-        _queue = dispatch_queue_create("com.mikeash.MABGTimer", NULL);
+        _queue = dispatch_queue_create(queueLabel, NULL);
     }
     return self;
-}
-
-- (void)dealloc
-{
-    if(_timer)
-    {
-        dispatch_source_cancel(_timer);
-        dispatch_release(_timer);
-    }
-    dispatch_release(_queue);
-	
-#if !__has_feature(objc_arc) 
-    [super dealloc];
-#endif
 }
 
 - (void)_cancel
@@ -54,6 +40,26 @@
         _timer = NULL;
     }
 }    
+
+- (void)_finalize
+{
+    [self _cancel];
+    dispatch_release(_queue);
+}
+
+- (void)finalize
+{
+    [self _finalize];
+    [super finalize];
+}
+
+- (void)dealloc
+{
+    [self _finalize];
+#if !__has_feature(objc_arc) 
+    [super dealloc];
+#endif
+}
 
 - (void)setTargetQueue: (dispatch_queue_t)target
 {
