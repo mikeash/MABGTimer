@@ -14,6 +14,8 @@
 
 
 @implementation MABGTimer
+@synthesize obj = _obj;
+@synthesize queue = _queue;
 
 - (id)initWithObject: (id)obj
 {

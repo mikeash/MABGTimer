@@ -24,6 +24,9 @@ typedef enum
     NSTimeInterval _nextFireTime;
 }
 
+@property (assign) id obj;
+@property (assign, readonly) dispatch_queue_t queue;
+
 - (id)initWithObject:(id)obj;
 - (id)initWithObject:(id)obj behavior: (MABGTimerBehavior)behavior queueLabel:(char const *)queueLabel;
 
