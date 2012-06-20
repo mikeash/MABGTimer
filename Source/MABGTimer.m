@@ -35,7 +35,7 @@
 
 - (void)_cancel
 {
-    if(_timer)
+    if (_timer)
     {
         dispatch_source_cancel(_timer);
         dispatch_release(_timer);
@@ -46,7 +46,9 @@
 - (void)_finalize
 {
     [self _cancel];
+    
     dispatch_release(_queue);
+    _queue = nil;
 }
 
 - (void)finalize
@@ -88,16 +90,16 @@
         BOOL hasTimer = _timer != nil;
         
         BOOL shouldProceed = NO;
-        if(!hasTimer)
+        if (!hasTimer)
             shouldProceed = YES;
-        else if(_behavior == MABGTimerDelay)
+        else if (_behavior == MABGTimerDelay)
             shouldProceed = YES;
-        else if(_behavior == MABGTimerCoalesce && [self _now] + delay < _nextFireTime)
+        else if (_behavior == MABGTimerCoalesce && [self _now] + delay < _nextFireTime)
             shouldProceed = YES;
         
         if(shouldProceed)
         {
-            if(!hasTimer)
+            if (!hasTimer)
                 _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, _queue);
             dispatch_source_set_timer(_timer, dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC), 0, 0);
             _nextFireTime = [self _now] + delay;
@@ -113,7 +115,8 @@
 
 - (void)performWhileLocked: (dispatch_block_t)block
 {
-    dispatch_sync(_queue, block);
+    if (_queue)
+        dispatch_sync(_queue, block);
 }
 
 - (void)cancel
