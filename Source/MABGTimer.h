@@ -28,7 +28,7 @@ typedef enum
 @property (assign, readonly) dispatch_queue_t queue;
 
 - (id)initWithObject:(id)obj;
-- (id)initWithObject:(id)obj behavior: (MABGTimerBehavior)behavior queueLabel:(char const *)queueLabel;
+- (id)initWithObject:(id)obj behavior:(MABGTimerBehavior)behavior queueLabel:(char const *)queueLabel;
 
 - (void)setTargetQueue: (dispatch_queue_t)target;
 - (void)afterDelay: (NSTimeInterval)delay do: (void (^)(id self))block;
