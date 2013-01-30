@@ -9,6 +9,27 @@
 #import <dispatch/dispatch.h>
 #import <Foundation/Foundation.h>
 
+
+#ifndef mt_dispatch_release
+    #if TARGET_OS_IPHONE
+        #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
+            #define mt_dispatch_release(__v)
+            #define mt_dispatch_strong strong
+        #else
+            #define mt_dispatch_release(__v) (dispatch_release(__v));
+            #define mt_dispatch_strong assign
+        #endif
+        #else
+        #if MAC_OS_X_VERSION_MIN_REQUIRED >= 1080
+            #define mt_dispatch_release(__v)
+            #define mt_dispatch_strong strong
+        #else
+            #define mt_dispatch_release(__v) (dispatch_release(__v));
+            #define mt_dispatch_strong assign
+        #endif
+    #endif
+#endif
+
 typedef enum
 {
     MABGTimerCoalesce, // subsequent calls with charged timer can only reduce the time until firing, not extend; default value
@@ -25,7 +46,7 @@ typedef enum
 }
 
 @property (assign) id obj;
-@property (assign, readonly) dispatch_queue_t queue;
+@property (mt_dispatch_strong, readonly) dispatch_queue_t queue;
 
 - (id)initWithObject:(id)obj;
 - (id)initWithObject:(id)obj behavior:(MABGTimerBehavior)behavior queueLabel:(char const *)queueLabel;
