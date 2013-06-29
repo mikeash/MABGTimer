@@ -38,14 +38,14 @@ typedef enum
 
 @interface MABGTimer : NSObject
 {
-    __weak id _obj;
+    __unsafe_unretained id _obj;
     dispatch_queue_t _queue;
     dispatch_source_t _timer;
     MABGTimerBehavior _behavior;
     NSTimeInterval _nextFireTime;
 }
 
-@property (weak) id obj;
+@property (assign) id obj;
 @property (mt_dispatch_strong, readonly) dispatch_queue_t queue;
 
 - (id)initWithObject:(id)obj;
