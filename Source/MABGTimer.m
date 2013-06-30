@@ -81,7 +81,7 @@
 		NSTimeInterval t = mach_absolute_time();
 		t *= info.numer;
 		t /= info.denom;
-		return t;
+		return t / NSEC_PER_SEC;
 }
 
 - (void)afterDelay: (NSTimeInterval)delay do: (void (^)(id self))block
