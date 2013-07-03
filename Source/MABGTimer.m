@@ -81,12 +81,21 @@
 		NSTimeInterval t = mach_absolute_time();
 		t *= info.numer;
 		t /= info.denom;
-		return t;
+		return t / NSEC_PER_SEC;
 }
 
 - (void)afterDelay: (NSTimeInterval)delay do: (void (^)(id self))block
 {
+    NSTimeInterval requestTime = [self _now];
+    
     [self performWhileLocked: ^{
+
+        // adjust delay to take into account time elapsed between the method call and execution of this block
+        NSTimeInterval now = [self _now];
+        NSTimeInterval adjustedDelay = delay - (now - requestTime);
+        if (adjustedDelay < 0.0)
+            adjustedDelay = 0.0;
+
         BOOL hasTimer = _timer != nil;
         
         BOOL shouldProceed = NO;
@@ -94,15 +103,15 @@
             shouldProceed = YES;
         else if (_behavior == MABGTimerDelay)
             shouldProceed = YES;
-        else if (_behavior == MABGTimerCoalesce && [self _now] + delay < _nextFireTime)
+        else if (_behavior == MABGTimerCoalesce && [self _now] + adjustedDelay < _nextFireTime)
             shouldProceed = YES;
         
         if(shouldProceed)
         {
             if (!hasTimer)
                 _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, _queue);
-            dispatch_source_set_timer(_timer, dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC), 0, 0);
-            _nextFireTime = [self _now] + delay;
+            dispatch_source_set_timer(_timer, dispatch_time(DISPATCH_TIME_NOW, adjustedDelay * NSEC_PER_SEC), 0, 0);
+            _nextFireTime = [self _now] + adjustedDelay;
             dispatch_source_set_event_handler(_timer, ^{
                 block(_obj);
                 [self _cancel];
