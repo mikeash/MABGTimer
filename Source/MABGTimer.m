@@ -72,16 +72,7 @@
 
 - (NSTimeInterval)_now
 {
-    static mach_timebase_info_data_t info;
-	static dispatch_once_t pred;
-	dispatch_once(&pred, ^{
-		mach_timebase_info(&info);
-	});
-	
-	NSTimeInterval t = mach_absolute_time();
-	t *= info.numer;
-	t /= info.denom;
-	return t / NSEC_PER_SEC;
+    CACurrentMediaTime();
 }
 
 - (void)afterDelay: (NSTimeInterval)delay do: (void (^)(id self))block
