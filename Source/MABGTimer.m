@@ -17,18 +17,24 @@
 @synthesize obj = _obj;
 @synthesize queue = _queue;
 
-- (id)initWithObject: (id)obj
+- (id)initWithObject:(id)obj
 {
-    return [self initWithObject: obj behavior: MABGTimerCoalesce queueLabel:"com.mikeash.MABGTimer"];
+    return [self initWithObject:obj behavior:MABGTimerCoalesce queueLabel:"com.mikeash.MABGTimer"];
 }
 
-- (id)initWithObject: (id)obj behavior: (MABGTimerBehavior)behavior queueLabel:(char const *)queueLabel
+- (id)initWithObject:(id)obj behavior:(MABGTimerBehavior)behavior queueLabel:(char const *)queueLabel
+{
+    dispatch_queue_t queue = dispatch_queue_create(queueLabel, NULL);
+    return [self initWithObject:obj behavior:behavior queue:queue];
+}
+
+- (id)initWithObject:(id)obj behavior:(MABGTimerBehavior)behavior queue:(dispatch_queue_t)queue
 {
     if((self = [super init]))
     {
         _obj = obj;
         _behavior = behavior;
-        _queue = dispatch_queue_create(queueLabel, NULL);
+        _queue = queue;
     }
     return self;
 }
@@ -72,7 +78,7 @@
 
 - (NSTimeInterval)_now
 {
-    CACurrentMediaTime();
+    return CACurrentMediaTime();
 }
 
 - (void)afterDelay: (NSTimeInterval)delay do: (void (^)(id self))block
