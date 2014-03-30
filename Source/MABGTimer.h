@@ -54,6 +54,7 @@ typedef enum
 
 - (void)setTargetQueue: (dispatch_queue_t)target;
 - (void)afterDelay: (NSTimeInterval)delay do: (void (^)(id self))block;
+- (void)afterDelay: (NSTimeInterval)delay behavior: (MABGTimerBehavior)behavior do: (void (^)(id self))block;
 - (void)performWhileLocked: (void (^)(void))block;
 - (void)cancel;
 

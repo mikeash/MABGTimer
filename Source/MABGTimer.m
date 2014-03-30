@@ -17,18 +17,18 @@
 @synthesize obj = _obj;
 @synthesize queue = _queue;
 
-- (id)initWithObject:(id)obj
+- (id)initWithObject: (id)obj
 {
-    return [self initWithObject:obj behavior:MABGTimerCoalesce queueLabel:"com.mikeash.MABGTimer"];
+    return [self initWithObject: obj behavior: MABGTimerCoalesce queueLabel: "com.mikeash.MABGTimer"];
 }
 
-- (id)initWithObject:(id)obj behavior:(MABGTimerBehavior)behavior queueLabel:(char const *)queueLabel
+- (id)initWithObject: (id)obj behavior: (MABGTimerBehavior)behavior queueLabel: (char const *)queueLabel
 {
     dispatch_queue_t queue = dispatch_queue_create(queueLabel, NULL);
-    return [self initWithObject:obj behavior:behavior queue:queue];
+    return [self initWithObject: obj behavior: behavior queue: queue];
 }
 
-- (id)initWithObject:(id)obj behavior:(MABGTimerBehavior)behavior queue:(dispatch_queue_t)queue
+- (id)initWithObject: (id)obj behavior: (MABGTimerBehavior)behavior queue: (dispatch_queue_t)queue
 {
     if((self = [super init]))
     {
@@ -83,6 +83,11 @@
 
 - (void)afterDelay: (NSTimeInterval)delay do: (void (^)(id self))block
 {
+    return [self afterDelay: delay behavior: _behavior do: block];
+}
+
+- (void)afterDelay: (NSTimeInterval)delay behavior: (MABGTimerBehavior)behavior do: (void (^)(id self))block
+{
     NSTimeInterval requestTime = [self _now];
     
     [self performWhileLocked: ^{
@@ -98,9 +103,9 @@
         BOOL shouldProceed = NO;
         if (!hasTimer)
             shouldProceed = YES;
-        else if (_behavior == MABGTimerDelay)
+        else if (behavior == MABGTimerDelay)
             shouldProceed = YES;
-        else if (_behavior == MABGTimerCoalesce && [self _now] + adjustedDelay < _nextFireTime)
+        else if (behavior == MABGTimerCoalesce && [self _now] + adjustedDelay < _nextFireTime)
             shouldProceed = YES;
         
         if(shouldProceed)
