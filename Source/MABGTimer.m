@@ -34,7 +34,7 @@
     {
         _obj = obj;
         _behavior = behavior;
-        _queue = queue;
+        _queue = mt_dispatch_retain(queue);
     }
     return self;
 }

@@ -13,17 +13,21 @@
 #ifndef mt_dispatch_strong
     #if TARGET_OS_IPHONE
         #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
+            #define mt_dispatch_retain(__v)
             #define mt_dispatch_release(__v)
             #define mt_dispatch_strong strong
         #else
+            #define mt_dispatch_retain(__v) (dispatch_retain(__v));
             #define mt_dispatch_release(__v) (dispatch_release(__v));
             #define mt_dispatch_strong assign
         #endif
     #else
         #if MAC_OS_X_VERSION_MIN_REQUIRED >= 1080
+            #define mt_dispatch_retain(__v)
             #define mt_dispatch_release(__v)
             #define mt_dispatch_strong strong
         #else
+            #define mt_dispatch_retain(__v) (dispatch_retain(__v));
             #define mt_dispatch_release(__v) (dispatch_release(__v));
             #define mt_dispatch_strong assign
         #endif
