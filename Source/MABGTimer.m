@@ -38,7 +38,6 @@
     if (_timer)
     {
         dispatch_source_cancel(_timer);
-        mt_dispatch_release(_timer);
         _timer = NULL;
     }
 }    
@@ -46,8 +45,6 @@
 - (void)_finalize
 {
     [self _cancel];
-    
-    mt_dispatch_release(_queue);
     _queue = nil;
 }
 
