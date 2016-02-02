@@ -28,7 +28,7 @@
     {
         _obj = obj;
         _behavior = behavior;
-        _queue = dispatch_queue_create(queueLabel, NULL);
+        _queue = dispatch_queue_create(queueLabel, DISPATCH_QUEUE_SERIAL);
     }
     return self;
 }
