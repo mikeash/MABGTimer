@@ -11,7 +11,15 @@
 #import <mach/mach_time.h>
 #import <objc/runtime.h>
 
-
+@interface MABGTimer ()
+{
+    __weak id _obj;
+    dispatch_queue_t _queue;
+    dispatch_source_t _timer;
+    MABGTimerBehavior _behavior;
+    NSTimeInterval _nextFireTime;
+}
+@end
 
 @implementation MABGTimer
 @synthesize obj = _obj;
