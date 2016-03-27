@@ -17,7 +17,7 @@ typedef NS_ENUM(NSUInteger, MABGTimerBehavior) {
 
 @interface MABGTimer : NSObject
 
-@property (weak) id obj;
+@property (weak, nullable) id obj;
 @property (readonly, nonnull) dispatch_queue_t queue;
 
 - (nonnull instancetype)initWithObject:(nonnull id)obj;
