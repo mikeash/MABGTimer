@@ -115,6 +115,7 @@
         {
             if (!hasTimer)
                 _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, _queue);
+            
             dispatch_source_set_timer(_timer, dispatch_time(DISPATCH_TIME_NOW, adjustedDelay * NSEC_PER_SEC), 0, 0);
             _nextFireTime = [self _now] + adjustedDelay;
             dispatch_source_set_event_handler(_timer, ^{
