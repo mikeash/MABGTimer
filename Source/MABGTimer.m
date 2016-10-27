@@ -8,8 +8,8 @@
 
 #import "MABGTimer.h"
 
-#import <mach/mach_time.h>
-#import <objc/runtime.h>
+@import MachO;
+@import ObjectiveC;
 
 @interface MABGTimer ()
 {
