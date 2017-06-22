@@ -8,10 +8,18 @@
 
 #import "MABGTimer.h"
 
-#import <mach/mach_time.h>
-#import <objc/runtime.h>
+@import MachO;
+@import ObjectiveC;
 
-
+@interface MABGTimer ()
+{
+    __weak id _obj;
+    dispatch_queue_t _queue;
+    dispatch_source_t _timer;
+    MABGTimerBehavior _behavior;
+    NSTimeInterval _nextFireTime;
+}
+@end
 
 @implementation MABGTimer
 @synthesize obj = _obj;
@@ -28,7 +36,7 @@
     {
         _obj = obj;
         _behavior = behavior;
-        _queue = dispatch_queue_create(queueLabel, NULL);
+        _queue = dispatch_queue_create(queueLabel, DISPATCH_QUEUE_SERIAL);
     }
     return self;
 }
@@ -38,7 +46,6 @@
     if (_timer)
     {
         dispatch_source_cancel(_timer);
-        mt_dispatch_release(_timer);
         _timer = NULL;
     }
 }    
@@ -46,8 +53,6 @@
 - (void)_finalize
 {
     [self _cancel];
-    
-    mt_dispatch_release(_queue);
     _queue = nil;
 }
 
@@ -110,6 +115,7 @@
         {
             if (!hasTimer)
                 _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, _queue);
+            
             dispatch_source_set_timer(_timer, dispatch_time(DISPATCH_TIME_NOW, adjustedDelay * NSEC_PER_SEC), 0, 0);
             _nextFireTime = [self _now] + adjustedDelay;
             dispatch_source_set_event_handler(_timer, ^{

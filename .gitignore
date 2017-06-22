@@ -1,0 +1,4 @@
+*.xcuserdatad
+.DS_Store
+Carthage/Build
+build
