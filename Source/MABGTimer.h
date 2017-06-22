@@ -6,8 +6,7 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-@import Dispatch;
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSUInteger, MABGTimerBehavior) {
     /** Subsequent calls with charged timer can only reduce the time until firing, not extend; default value. */MABGTimerCoalesce,
