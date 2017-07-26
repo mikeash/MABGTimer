@@ -20,7 +20,7 @@
             #define mt_dispatch_strong assign
         #endif
     #else
-        #if MAC_OS_X_VERSION_MIN_REQUIRED >= 1080
+        #if defined(__OBJC2__) && MAC_OS_X_VERSION_MIN_REQUIRED >= 1080
             #define mt_dispatch_release(__v)
             #define mt_dispatch_strong strong
         #else
